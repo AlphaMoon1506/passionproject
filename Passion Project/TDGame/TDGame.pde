@@ -10,4 +10,8 @@ void draw() {
     t.update();
     t.display();
   }
+  if (gameState == 1) {
+    m.update();
+    m.display();
+  }
 }

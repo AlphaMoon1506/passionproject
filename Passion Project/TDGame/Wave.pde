@@ -1,5 +1,5 @@
-class Enemy {
-  Enemy(PVector pos, byte type) {
+class Wave {
+  Wave(byte type, int count) {
   }
   void display() {
   }

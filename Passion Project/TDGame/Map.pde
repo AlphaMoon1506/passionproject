@@ -1,6 +1,5 @@
 class Map {
   Map() {
-    
   }
   void display() {
   }

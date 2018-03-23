@@ -1,5 +1,5 @@
-class Enemy {
-  Enemy(PVector pos, byte type) {
+class Turret {
+  Turret(PVector pos, byte type) {
   }
   void display() {
   }

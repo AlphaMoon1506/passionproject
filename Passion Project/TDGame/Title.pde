@@ -19,7 +19,7 @@ class Title {
     if (mouseX>100 && mouseX<300) {
       for (int i = 0; i<2; i++) {
         if (mouseY>i*70+300 && mouseY<i*70+350 && mousePressed) {
-          if (i == 0);
+          if (i == 0) gameState = 1;
           else if (i == 1) exit();
         }
       }
