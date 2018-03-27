@@ -1,8 +1,7 @@
-class Turret {
-  Turret(PVector pos, byte type) {
-  }
-  void display() {
-  }
-  void update() {
-  }
+abstract class Turret {
+  PVector pos, vel;
+  byte type;
+  float angle;
+  abstract void display();
+  abstract void update();
 }

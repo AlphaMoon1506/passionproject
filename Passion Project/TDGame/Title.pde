@@ -1,5 +1,4 @@
 class Title {
-
   Title() {
   }
   void display() {

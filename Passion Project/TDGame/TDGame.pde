@@ -9,9 +9,14 @@ void draw() {
   if (gameState == 0) {
     t.update();
     t.display();
-  }
-  if (gameState == 1) {
+  } else if (gameState == 1) {
     m.update();
     m.display();
   }
+}
+void ellipse(PVector p, int w, int h) {
+  ellipse(p.x, p.y, w, h);
+}
+void rect(PVector p, int w, int h) {
+  rect(p.x, p.y, w, h);
 }
