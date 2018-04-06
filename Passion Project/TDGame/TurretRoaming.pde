@@ -14,14 +14,14 @@ class TurretRoaming extends Turret {
     if (vel > 0) vel-=0.5;
     else if (vel < 0) vel+=0.5;
     pos.x += vel;
-    if (pos.x > width-50) {
+    if (pos.x > width-100) {
       pos.x-=10;
       vel = vel*-1;
-      vel = vel/50;
-    } else if (pos.x < 200) {
+      vel = vel*0.5;
+    } else if (pos.x < 300) {
       pos.x+=10;
       vel = vel*-1;
-      vel = vel/50;
+      vel = vel*0.5;
     }
   }
   void display() {
