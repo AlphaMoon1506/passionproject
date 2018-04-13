@@ -10,8 +10,8 @@ void draw() {
     t.update();
     t.display();
   } else if (gameState == 1) {
-    m.update();
     m.display();
+    m.update();
   }
 }
 void ellipse(PVector p, int w, int h) {

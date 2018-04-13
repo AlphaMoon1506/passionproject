@@ -1,8 +1,8 @@
 class Line {
   PVector r0, m;
   Line(PVector a, PVector b) {
-    r0 = a;
-    m = b;
+    r0 = a.copy();
+    m = b.copy();
   }
   Float yCal(float x) {
     if (m.x==0) return null;
@@ -16,9 +16,21 @@ class Line {
     float x = r0.y+(m.y*t);
     return x;
   }
+  String toString() {
+    return r0 + "+t" + m;
+  }
 }
 
 Line getLine(PVector a, PVector b) {
   PVector m = a.sub(b);
   return new Line(a, m);
+}
+PVector intersection(Line l1, Line l2) {
+  println(l1); println(l2);
+  if ((l2.m.x - l1.m.x) == 0) return null; //TEMP
+  Float t = (l1.r0.x - l2.r0.x) / (l2.m.x - l1.m.x);
+  Float x = (l1.r0.x + (t*l1.m.x));
+  Float y = (l1.r0.y + (t*l1.m.y));
+  println(x);
+  return new PVector(x, y);
 }

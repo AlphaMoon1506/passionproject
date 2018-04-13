@@ -1,5 +1,6 @@
 class TurretMachineGun extends Turret {
-  TurretMachineGun() {
+  TurretMachineGun(PVector position) {
+    pos = position;
   }
   void update() {
     //Shooting

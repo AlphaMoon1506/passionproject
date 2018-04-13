@@ -9,5 +9,10 @@ class Projectile {
   }
   void update() {
     pos.add(vel);
+   
+  }
+  boolean checkRemove() {
+    if (pos.x > width || pos.x < 0 || pos.y > height || pos.y < 0) return true;
+    return false;
   }
 }

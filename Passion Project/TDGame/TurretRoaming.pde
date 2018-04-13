@@ -24,10 +24,11 @@ class TurretRoaming extends Turret {
       velocity = velocity*0.5;
     }
     // Shooting
-    if (mousePressed) {
-      vel = PVector.fromAngle(angle, new PVector(mouseX, mouseY));
+    if (mousePressed && m.shootingMode) {
+      vel = PVector.fromAngle(angle+random(-0.05,0.05), new PVector(mouseX, mouseY));
       vel.x = vel.x*50;
       vel.y = vel.y*50;
+      if (frameCount % 10 == 1)
       m.projectileList.add(new Projectile(pos, vel));
     }
   }
