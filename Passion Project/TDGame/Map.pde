@@ -7,7 +7,7 @@ class Map {
   boolean shootingMode = false;
   Map() {
     turretList.add(new TurretRoaming());
-    quadList.add(getQuad(new PVector(10, 10), new PVector(10, 500), new PVector(600, 500), new PVector(500, 10)));
+    quadList.add(getQuad(new PVector(100, 100), new PVector(100, 200), new PVector(200, 200), new PVector(200, 100)));
   }
   void display() {
     fill(100);
@@ -18,7 +18,6 @@ class Map {
   void update() {
     for (Quad q : quadList) {
       q.display();
-      println("quad");
     }
     for (Turret t : turretList) {
       t.update();
@@ -27,6 +26,9 @@ class Map {
     for (Projectile p : projectileList) {
       p.update();
       p.display();
+      for (Quad q : quadList) {
+        if (p.pos != null) println(q.contains(p.pos));
+      }
     }
     for (int i = 0; i<projectileList.size(); i++) {
       Projectile p = m.projectileList.get(i);
@@ -34,7 +36,6 @@ class Map {
     }
     if (keyPressed) {
       if (key == ' ') shootingMode = !shootingMode;
-      println(shootingMode);
     }
   }
 }
