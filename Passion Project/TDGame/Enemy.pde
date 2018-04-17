@@ -4,6 +4,7 @@ class Enemy {
     pos = position;
   }
   void display() {
+    ellipse(pos, 30, 30);
   }
   void update() {
   }

@@ -26,8 +26,8 @@ class TurretRoaming extends Turret {
     // Shooting
     if (mousePressed /* && m.shootingMode*/) {
       vel = PVector.fromAngle(angle+random(-0.05,0.05), new PVector(mouseX, mouseY));
-      vel.x = vel.x*50;
-      vel.y = vel.y*50;
+      vel.x = vel.x*30;
+      vel.y = vel.y*30;
       if (frameCount % 10 == 1)
       m.projectileList.add(new Projectile(pos, vel));
     }
