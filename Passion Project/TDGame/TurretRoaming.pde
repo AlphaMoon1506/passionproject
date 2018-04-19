@@ -6,12 +6,15 @@ class TurretRoaming extends Turret {
   }
   void update() {
     // Motion / Aiming
-    angle = (new PVector(mouseX, mouseY).sub(pos.x, pos.y).heading());
+    if (m.shootingMode) angle = (new PVector(mouseX, mouseY).sub(pos.x, pos.y).heading());
     velocity = velocity*0.92;
     if (velocity > -0.005 && velocity < 0.005) velocity = 0;
-    if (keyPressed) {
+    if (keyPressed && m.shootingMode) {
       if (key == 'a' || key == 'A' && velocity > -5) velocity-=0.9;
       else if (key == 'd' || key == 'D' && velocity < 5) velocity+=0.9;
+    }
+    else if (pos.x < 800 && !m.shootingMode) {
+      if (velocity < 5) velocity+=0.9;
     }
     pos.x += velocity;
     if (pos.x > width-100) {
@@ -24,7 +27,7 @@ class TurretRoaming extends Turret {
       velocity = velocity*0.5;
     }
     // Shooting
-    if (mousePressed /* && m.shootingMode*/) {
+    if (mousePressed && m.shootingMode) {
       vel = PVector.fromAngle(angle+random(-0.05,0.05), new PVector(mouseX, mouseY));
       vel.x = vel.x*30;
       vel.y = vel.y*30;

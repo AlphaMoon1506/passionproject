@@ -4,6 +4,7 @@ class Map {
   ArrayList<Projectile> projectileList = new ArrayList<Projectile>();
   ArrayList<Rect> rectList = new ArrayList<Rect>();
   boolean shootingMode = false;
+  short selection = 3;
   Map() {
     turretList.add(new TurretRoaming());
     rectList.add(new Rect(0, 0, 1000, 50));
@@ -21,8 +22,16 @@ class Map {
     rect(0, 50, width, 100);
     rect(0, 300, width, 100);
     rect(0, 450, width, 100);
+    for (Rect r : rectList) {
+      fill(150);
+      r.display();
+    }
+    fill(200);
+    rect(5, 5, 100, 40);
+    rect(110, 5, 100, 40);
   }
   void update() {
+    ///////////////////////////////Main Update/Run Segments///////////////////////
     for (Turret t : turretList) {
       fill(255);
       t.update();
@@ -32,22 +41,36 @@ class Map {
       p.update();
       p.display();
     }
-    for (Rect r : rectList) {
-      fill(255);
-      r.display();
-    }
     for (int i = 0; i<projectileList.size(); i++) {
       Projectile p = m.projectileList.get(i);
       if (p.checkRemove()) m.projectileList.remove(p);
       for (Rect r : rectList) {
-        if (r.checkCollision(p.pos)) { 
-          println("hit"); 
-          m.projectileList.remove(p);
+        if (r.checkCollision(p.pos)) m.projectileList.remove(p);
+      }
+    }
+    //////////////////////////////////////////////////////////////////////////////
+    if (!shootingMode) {
+      if (keyPressed) {
+        if (key == '1') m.selection = 0;
+        else if (key == '2') m.selection = 1;
+        else if (key == '3') m.selection = 2;
+      }
+      println(m.selection);
+      if (m.selection == 0) {
+        ellipse(mouseX, mouseY, 10, 10);
+        if (mousePressed) {
+          
+          turretList.add(new TurretMachineGun(new PVector(mouseX, mouseY)));
         }
       }
     }
+    //////////////////////////////////////////////////////////////
     if (keyPressed) {
-      if (key == ' ') shootingMode = !shootingMode;
+      if (key == ' ') {
+        shootingMode = !shootingMode;
+        if (!shootingMode) m.selection = 3;
+      }
     }
+    //////////////////////////////////////////////////////////////
   }
 }

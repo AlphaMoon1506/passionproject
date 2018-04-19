@@ -14,4 +14,8 @@ class Rect {
     if (p.x > pos.x && p.x < (pos.x+size.x) && p.y > pos.y && p.y < (pos.y+size.y)) return true;;
     return false;
   }
+  boolean placementCheck() {
+    
+    return false;
+  }
 }
