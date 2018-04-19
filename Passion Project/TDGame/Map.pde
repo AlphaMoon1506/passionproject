@@ -7,6 +7,7 @@ class Map {
   short selection = 3;
   Map() {
     turretList.add(new TurretRoaming());
+    enemyList.add(new Enemy(new PVector(-100, 10), byte(1)));
     rectList.add(new Rect(0, 0, 1000, 50));
     rectList.add(new Rect(0, 150, 20, 150));
     rectList.add(new Rect(100, 150, 200, 150));
@@ -32,6 +33,10 @@ class Map {
   }
   void update() {
     ///////////////////////////////Main Update/Run Segments///////////////////////
+    for (Enemy e : enemyList) {
+      e.update();
+      e.display();
+    }
     for (Turret t : turretList) {
       fill(255);
       t.update();
@@ -58,9 +63,12 @@ class Map {
       println(m.selection);
       if (m.selection == 0) {
         ellipse(mouseX, mouseY, 10, 10);
-        if (mousePressed) {
-          
-          turretList.add(new TurretMachineGun(new PVector(mouseX, mouseY)));
+        if (mousePressed && mouseX > 0 && mouseX < width && mouseY > 300 && mouseY < height) {
+          boolean no = false;
+          for (Rect r : rectList) {
+            if (r.placementCheck()) no = true;
+          }
+          if (!no) turretList.add(new TurretMachineGun(new PVector(mouseX, mouseY)));
         }
       }
     }

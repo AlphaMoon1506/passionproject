@@ -33,13 +33,13 @@ class TurretMachineGun extends Turret {
   }
   void display() {
     rectMode(CENTER);
-    rect(pos, 50, 50);
-    ellipse(pos, 50, 50);
+    rect(pos, 40, 40);
+    ellipse(pos, 20, 20);
     pushMatrix();
     rectMode(CORNER);
     translate(pos.x, pos.y);
     rotate(angle);
-    rect(0, -5, 40, 10);
+    rect(0, -5, 30, 5);
     popMatrix();
   }
 }
