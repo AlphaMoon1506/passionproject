@@ -5,9 +5,11 @@ class Map {
   ArrayList<Rect> rectList = new ArrayList<Rect>();
   boolean shootingMode = false;
   short selection = 3;
+
+  PImage[] tur1 = new PImage[4];
   Map() {
     turretList.add(new TurretRoaming());
-    enemyList.add(new Enemy(new PVector(-100, 10), byte(1)));
+    enemyList.add(new Enemy(new PVector(-100, 600), byte(1)));
     rectList.add(new Rect(0, 0, 1000, 50));
     rectList.add(new Rect(0, 150, 20, 150));
     rectList.add(new Rect(100, 150, 200, 150));
@@ -18,11 +20,21 @@ class Map {
     rectList.add(new Rect(900, 400, 100, 50));
     rectList.add(new Rect(0, 550, 1000, 50));
   }
+  void loadImages() {
+    for (int i = 0; i<4; i++) {
+      tur1[i] = loadImage("sprite_turretRoamingHead"+i+".png");
+      println(i + " loaded");
+    }
+  }
   void display() {
     fill(100);
     rect(0, 50, width, 100);
     rect(0, 300, width, 100);
     rect(0, 450, width, 100);
+    fill (255);
+    for (Enemy e : enemyList) e.display();
+    for (Projectile p : projectileList) p.display();
+    for (Turret t : turretList) t.display();
     for (Rect r : rectList) {
       fill(150);
       r.display();
@@ -35,22 +47,26 @@ class Map {
     ///////////////////////////////Main Update/Run Segments///////////////////////
     for (Enemy e : enemyList) {
       e.update();
-      e.display();
     }
     for (Turret t : turretList) {
       fill(255);
       t.update();
-      t.display();
     }
     for (Projectile p : projectileList) {
       p.update();
-      p.display();
     }
     for (int i = 0; i<projectileList.size(); i++) {
       Projectile p = m.projectileList.get(i);
       if (p.checkRemove()) m.projectileList.remove(p);
       for (Rect r : rectList) {
         if (r.checkCollision(p.pos)) m.projectileList.remove(p);
+      }
+      for (int j = 0; j<enemyList.size(); j++) {
+        Enemy e = m.enemyList.get(j);
+        if (p.checkHit(e)) {
+          m.projectileList.remove(p); 
+          m.enemyList.remove(e);
+        }
       }
     }
     //////////////////////////////////////////////////////////////////////////////

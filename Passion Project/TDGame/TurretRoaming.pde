@@ -12,8 +12,7 @@ class TurretRoaming extends Turret {
     if (keyPressed && m.shootingMode) {
       if (key == 'a' || key == 'A' && velocity > -5) velocity-=0.9;
       else if (key == 'd' || key == 'D' && velocity < 5) velocity+=0.9;
-    }
-    else if (pos.x < 800 && !m.shootingMode) {
+    } else if (pos.x < 800 && !m.shootingMode) {
       if (velocity < 5) velocity+=0.9;
     }
     pos.x += velocity;
@@ -26,24 +25,25 @@ class TurretRoaming extends Turret {
       velocity = velocity*-1;
       velocity = velocity*0.5;
     }
+    if (imageIndex != 0 && !mousePressed) imageIndex++;
     // Shooting
     if (mousePressed && m.shootingMode) {
-      vel = PVector.fromAngle(angle+random(-0.05,0.05), new PVector(mouseX, mouseY));
-      vel.x = vel.x*30;
-      vel.y = vel.y*30;
-      if (frameCount % 10 == 1)
-      m.projectileList.add(new Projectile(pos, vel));
+      if (imageIndex <= 3 && frameCount % 5 == 1) imageIndex++;
+      vel = PVector.fromAngle(angle+random(-0.05, 0.05), new PVector(mouseX, mouseY));
+      vel.normalize();
+      if (imageIndex == 1 && frameCount % 5 == 1) m.projectileList.add(new Projectile(pos, vel));
     }
   }
   void display() {
+    if (imageIndex > 3) imageIndex = 0;
+    fill(255);
     rectMode(CENTER);
     rect(pos, 100, 60);
-    ellipse(pos, 50, 50);
-    pushMatrix();
     rectMode(CORNER);
+    pushMatrix();
     translate(pos.x, pos.y);
     rotate(angle);
-    rect(0, -5, 40, 10);
+    image(m.tur1[imageIndex], 0, 0, 201, 201);
     popMatrix();
   }
 }

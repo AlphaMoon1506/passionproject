@@ -21,13 +21,12 @@ class TurretMachineGun extends Turret {
     if (best!=null && bestDistance < 250) { 
       angle = best.pos.copy().sub(pos).heading();
       vel = PVector.fromAngle(angle, best.pos.copy());
-      vel.x = vel.x * 50;                                            //this calculates velocity and trajectory for the bullets, as well as rotation for the turret
-      vel.y = vel.y * 50;
+      vel.normalize();
       lock = true;
     } else {
       lock = false;
     }
-    if (mousePressed && lock == true) {
+    if (lock == true) {
       m.projectileList.add(new Projectile(pos, vel));            //every time the cannon is at image zero and the lock is true, it will fire a shell
     }
   }
