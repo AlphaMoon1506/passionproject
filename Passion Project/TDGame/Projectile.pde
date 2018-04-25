@@ -17,7 +17,7 @@ class Projectile {
     return false;
   }
   boolean checkHit(Enemy e) {
-    if (pos.dist(e.pos) < 10) return true;
+    if (pos.dist(e.pos) < 12) return true;
     return false; 
   }
 }

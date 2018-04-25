@@ -5,11 +5,11 @@ class Map {
   ArrayList<Rect> rectList = new ArrayList<Rect>();
   boolean shootingMode = false;
   short selection = 3;
-
+  int enemyCount = 1;
   PImage[] tur1 = new PImage[4];
   Map() {
     turretList.add(new TurretRoaming());
-    enemyList.add(new Enemy(new PVector(-100, 600), byte(1)));
+    enemyList.add(new Enemy(new PVector(-100, 500), byte(1)));
     rectList.add(new Rect(0, 0, 1000, 50));
     rectList.add(new Rect(0, 150, 20, 150));
     rectList.add(new Rect(100, 150, 200, 150));
@@ -64,10 +64,14 @@ class Map {
       for (int j = 0; j<enemyList.size(); j++) {
         Enemy e = m.enemyList.get(j);
         if (p.checkHit(e)) {
-          m.projectileList.remove(p); 
-          m.enemyList.remove(e);
+          e.hp--;
+          m.projectileList.remove(p);
         }
       }
+    }
+    for (int i = 0; i<enemyList.size(); i++) {
+      Enemy e = m.enemyList.get(i);
+      if (e.hp<1) m.enemyList.remove(e);
     }
     //////////////////////////////////////////////////////////////////////////////
     if (!shootingMode) {
@@ -96,5 +100,11 @@ class Map {
       }
     }
     //////////////////////////////////////////////////////////////
+    if (enemyList.size() < 1) {
+      enemyCount+=2;
+      for (int i = 0; i<enemyCount; i++) {
+        enemyList.add(new Enemy(new PVector(-100+random(-50, 50), 500+random(-50, 50)), byte(1)));
+      }
+    }
   }
 }

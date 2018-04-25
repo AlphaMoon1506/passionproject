@@ -26,7 +26,7 @@ class TurretMachineGun extends Turret {
     } else {
       lock = false;
     }
-    if (lock == true) {
+    if (lock == true && frameCount % 10 == 1) {
       m.projectileList.add(new Projectile(pos, vel));            //every time the cannon is at image zero and the lock is true, it will fire a shell
     }
   }
