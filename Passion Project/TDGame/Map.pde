@@ -7,6 +7,7 @@ class Map {
   short selection = 3;
   int enemyCount = 1;
   PImage[] tur1 = new PImage[4];
+  PImage tur1b;
   Map() {
     turretList.add(new TurretRoaming());
     enemyList.add(new Enemy(new PVector(-100, 500), byte(1)));
@@ -23,8 +24,8 @@ class Map {
   void loadImages() {
     for (int i = 0; i<4; i++) {
       tur1[i] = loadImage("sprite_turretRoamingHead"+i+".png");
-      println(i + " loaded");
     }
+    tur1b = loadImage("turretRoamingBody.png");
   }
   void display() {
     fill(100);
@@ -42,6 +43,7 @@ class Map {
     fill(200);
     rect(5, 5, 100, 40);
     rect(110, 5, 100, 40);
+    rect(824, 74, 2, 2);
   }
   void update() {
     ///////////////////////////////Main Update/Run Segments///////////////////////

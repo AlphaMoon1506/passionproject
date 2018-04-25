@@ -37,13 +37,11 @@ class TurretRoaming extends Turret {
   void display() {
     if (imageIndex > 3) imageIndex = 0;
     fill(255);
-    rectMode(CENTER);
-    rect(pos, 100, 60);
-    rectMode(CORNER);
     pushMatrix();
     translate(pos.x, pos.y);
+    image(m.tur1b, -10, 0, 200, 201);
     rotate(angle);
-    image(m.tur1[imageIndex], 0, 0, 201, 201);
+    image(m.tur1[imageIndex], -2, -2, 201, 201);
     popMatrix();
   }
 }
