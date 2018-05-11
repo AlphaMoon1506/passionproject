@@ -16,7 +16,7 @@ class Enemy {
     tar[7] = new PVector(645+random(-10,10), 500+random(-10,10));
     tar[8] = new PVector(850+random(-10,10), 500+random(-10,10));
     tar[9] = new PVector(850, 350);
-    tar[10] = new PVector(1000+random(-10,10), 350+random(-10,10));
+    tar[10] = new PVector(1100+random(-10,10), 350+random(-10,10));
   }
   void display() {
     fill(50);

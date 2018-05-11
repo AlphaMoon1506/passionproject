@@ -20,7 +20,7 @@ class TurretRoaming extends Turret {
       pos.x-=10;
       velocity = velocity*-1;
       velocity = velocity*0.5;
-    } else if (pos.x < 300) {
+    } else if (pos.x < 250) {
       pos.x+=10;
       velocity = velocity*-1;
       velocity = velocity*0.5;

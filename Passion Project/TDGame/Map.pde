@@ -7,7 +7,9 @@ class Map {
   short selection = 3;
   int enemyCount = 1;
   PImage[] tur1 = new PImage[4];
-  PImage tur1b;
+  PImage tur1b, map, mapLight;
+
+  int health = 100, money = 100;
   Map() {
     turretList.add(new TurretRoaming());
     enemyList.add(new Enemy(new PVector(-100, 500), byte(1)));
@@ -23,9 +25,11 @@ class Map {
   }
   void loadImages() {
     for (int i = 0; i<4; i++) {
-      tur1[i] = loadImage("sprite_turretRoamingHead"+i+".png");
+      tur1[i] = requestImage("sprite_turretRoamingHead"+i+".png");
     }
-    tur1b = loadImage("turretRoamingBody.png");
+    tur1b = requestImage("turretRoamingBody.png");
+    map = requestImage("maplightrework.png");
+    mapLight = requestImage("maplight.png");
   }
   void display() {
     fill(100);
@@ -33,17 +37,14 @@ class Map {
     rect(0, 300, width, 100);
     rect(0, 450, width, 100);
     fill (255);
+    tint(255, 255);
+    image(map, width/2, height/2);
     for (Enemy e : enemyList) e.display();
     for (Projectile p : projectileList) p.display();
     for (Turret t : turretList) t.display();
-    for (Rect r : rectList) {
-      fill(150);
-      r.display();
-    }
+    tint(255, 100);
+    image(mapLight, width/2, height/2);
     fill(200);
-    rect(5, 5, 100, 40);
-    rect(110, 5, 100, 40);
-    rect(824, 74, 2, 2);
   }
   void update() {
     ///////////////////////////////Main Update/Run Segments///////////////////////
@@ -74,6 +75,7 @@ class Map {
     for (int i = 0; i<enemyList.size(); i++) {
       Enemy e = m.enemyList.get(i);
       if (e.hp<1) m.enemyList.remove(e);
+      if (e.pos.x>1100) m.enemyList.remove(e);
     }
     //////////////////////////////////////////////////////////////////////////////
     if (!shootingMode) {
@@ -91,6 +93,7 @@ class Map {
             if (r.placementCheck()) no = true;
           }
           if (!no) turretList.add(new TurretMachineGun(new PVector(mouseX, mouseY)));
+          m.selection = 3;
         }
       }
     }
