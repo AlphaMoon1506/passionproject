@@ -9,7 +9,7 @@ class Map {
   PImage[] tur1 = new PImage[4];
   PImage tur1b, map, mapLight;
 
-  int health = 100, money = 100;
+  int health = 100, money = 40;
   Map() {
     turretList.add(new TurretRoaming());
     enemyList.add(new Enemy(new PVector(-50, 500), byte(1)));
@@ -45,6 +45,24 @@ class Map {
     tint(255, 100);
     image(mapLight, width/2, height/2);
     fill(200);
+    textSize(20);
+    text("1. Machine Gun, $50   2. Shotgun, $100", 50, 20);
+    textAlign(RIGHT);
+    text("Health: " + health + " Money: " + money, width-20, 20);
+    textAlign(LEFT);
+    fill(80);
+    text("Press SPACEBAR to switch to shooting mode", 300, 200);
+    textSize(10);
+    if (shootingMode) {
+      fill(200);
+      stroke(200);
+      for (Rect r : rectList) {
+        if (r.checkCollision(new PVector(mouseX, mouseY))) stroke(200, 00, 00);
+      }
+      line(mouseX-10, mouseY, mouseX+10, mouseY);
+      line(mouseX, mouseY-10, mouseX, mouseY+10);
+      stroke(0);
+    }
   }
   void update() {
     ///////////////////////////////Main Update/Run Segments///////////////////////
@@ -74,8 +92,14 @@ class Map {
     }
     for (int i = 0; i<enemyList.size(); i++) {
       Enemy e = m.enemyList.get(i);
-      if (e.hp<1) m.enemyList.remove(e);
-      if (e.pos.x>1000) m.enemyList.remove(e);
+      if (e.hp<1) {
+        m.enemyList.remove(e);
+        money+=10;
+      }
+      if (e.pos.x>1000) {
+        m.enemyList.remove(e);
+        health--;
+      }
     }
     //////////////////////////////////////////////////////////////////////////////
     if (!shootingMode) {
@@ -87,13 +111,23 @@ class Map {
       println(m.selection);
       if (m.selection == 0) {
         ellipse(mouseX, mouseY, 10, 10);
+        fill(255, 50, 50, 50);
+        noStroke();
+        ellipse(mouseX, mouseY, 200, 200);
+        stroke(0); 
         if (mousePressed && mouseX > 0 && mouseX < width && mouseY > 300 && mouseY < height) {
           boolean no = false;
           for (Rect r : rectList) {
             if (r.placementCheck()) no = true;
           }
-          if (!no) turretList.add(new TurretMachineGun(new PVector(mouseX, mouseY)));
-          m.selection = 3;
+          for (Turret t : turretList) {
+            if (dist(mouseX, mouseY, t.pos.x, t.pos.y) < 50) no = true;
+          }
+          if (!no && money>=50) {
+            turretList.add(new TurretMachineGun(new PVector(mouseX, mouseY)));
+            money-=50;
+            m.selection = 3;
+          }
         }
       }
     }

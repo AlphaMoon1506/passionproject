@@ -18,7 +18,7 @@ class TurretMachineGun extends Turret {
         }
       }
     }
-    if (best!=null && bestDistance < 250) { 
+    if (best!=null && bestDistance < 200) { 
       angle = best.pos.copy().sub(pos).heading();
       vel = PVector.fromAngle(angle, best.pos.copy());
       vel.normalize();
