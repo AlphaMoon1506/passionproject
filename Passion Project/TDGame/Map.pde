@@ -113,7 +113,7 @@ class Map {
         ellipse(mouseX, mouseY, 10, 10);
         fill(255, 50, 50, 50);
         noStroke();
-        ellipse(mouseX, mouseY, 200, 200);
+        ellipse(mouseX, mouseY, 250, 250);
         stroke(0); 
         if (mousePressed && mouseX > 0 && mouseX < width && mouseY > 300 && mouseY < height) {
           boolean no = false;

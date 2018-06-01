@@ -26,17 +26,20 @@ class TurretMachineGun extends Turret {
     } else {
       lock = false;
     }
-    if (lock == true && frameCount % 20 ==  1) m.projectileList.add(new Projectile(pos, vel));
+    if (lock == true) {
+      if (imageIndex <= 3 && frameCount % 3 == 1) imageIndex++;
+      if (imageIndex == 1 && frameCount % 3 == 1) m.projectileList.add(new Projectile(pos, vel));
+    } else if (lock != true && imageIndex>0) imageIndex++;
   }
   void display() {
+    if (imageIndex > 3) imageIndex = 0;
     rectMode(CENTER);
     rect(pos, 40, 40);
-    ellipse(pos, 20, 20);
     pushMatrix();
-    rectMode(CORNER);
     translate(pos.x, pos.y);
     rotate(angle);
-    rect(0, -5, 30, 5);
+    image(m.tur1[imageIndex], -2, -2, 201, 201);
     popMatrix();
+    rectMode(CORNER);
   }
 }

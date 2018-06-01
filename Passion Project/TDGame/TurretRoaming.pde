@@ -39,7 +39,7 @@ class TurretRoaming extends Turret {
     fill(255);
     pushMatrix();
     translate(pos.x, pos.y);
-    image(m.tur1b, -10, 0, 200, 201);
+    image(m.tur1b, -10, -1);
     rotate(angle);
     image(m.tur1[imageIndex], -2, -2, 201, 201);
     popMatrix();
