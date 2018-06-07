@@ -1,12 +1,20 @@
 class Projectile {
   PVector pos, vel;
-  Projectile(PVector position, PVector velocity) {
+  float a;
+  Projectile(PVector position, PVector velocity, float angle) {
     pos = position.copy();
     vel = velocity.copy();
-    vel.setMag(10);
+    a = angle;
+    vel.setMag(25);
   }
   void display() {
-    ellipse(pos, 10, 10);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    rotate(a);
+    stroke(#FFDD52);
+    line(-20, 0, 0, 0);
+    popMatrix();
+    stroke(0);
   }
   void update() {
     pos.add(vel);

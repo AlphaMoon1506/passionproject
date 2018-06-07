@@ -1,4 +1,4 @@
-class Quad {
+class Quad { //DEPRECATED CODE
   Line l1, l2, l3, l4;
   Quad (Line a, Line b, Line c, Line d) {
     l1 = a;

@@ -31,7 +31,7 @@ class TurretRoaming extends Turret {
       if (imageIndex <= 3 && frameCount % 3 == 1) imageIndex++;
       vel = PVector.fromAngle(angle+random(-0.05, 0.05), new PVector(mouseX, mouseY));
       vel.normalize();
-      if (imageIndex == 1 && frameCount % 3 == 1) m.projectileList.add(new Projectile(pos, vel));
+      if (imageIndex == 1 && frameCount % 3 == 1) m.projectileList.add(new Projectile(pos, vel, angle));
     }
   }
   void display() {

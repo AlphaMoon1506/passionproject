@@ -9,7 +9,7 @@ class Map {
   PImage[] tur1 = new PImage[4];
   PImage tur1b, map, mapLight;
 
-  int health = 100, money = 40;
+  int health = 100, money = 140;
   Map() {
     turretList.add(new TurretRoaming());
     enemyList.add(new Enemy(new PVector(-50, 500), byte(1)));
@@ -115,7 +115,7 @@ class Map {
         noStroke();
         ellipse(mouseX, mouseY, 250, 250);
         stroke(0); 
-        if (mousePressed && mouseX > 0 && mouseX < width && mouseY > 300 && mouseY < height) {
+        if (mousePressed && mouseY > 300 && mouseY < height) {
           boolean no = false;
           for (Rect r : rectList) {
             if (r.placementCheck()) no = true;
@@ -126,6 +126,27 @@ class Map {
           if (!no && money>=50) {
             turretList.add(new TurretMachineGun(new PVector(mouseX, mouseY)));
             money-=50;
+            m.selection = 3;
+          }
+        }
+      }
+      if (m.selection == 1) {
+        ellipse(mouseX, mouseY, 10, 10);
+        fill(255, 50, 50, 50);
+        noStroke();
+        ellipse(mouseX, mouseY, 150, 150);
+        stroke(0);
+        if (mousePressed && mouseY > 300 && mouseY < height) {
+          boolean no = false;
+          for (Rect r : rectList) {
+            if (r.placementCheck()) no = true;
+          }
+          for (Turret t : turretList) {
+            if (dist(mouseX, mouseY, t.pos.x, t.pos.y) < 50) no = true;
+          }
+          if (!no && money>=100) {
+            turretList.add(new TurretShotgun(new PVector(mouseX, mouseY)));
+            money-=100;
             m.selection = 3;
           }
         }

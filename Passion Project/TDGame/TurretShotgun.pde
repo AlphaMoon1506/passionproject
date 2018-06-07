@@ -1,5 +1,5 @@
-class TurretMachineGun extends Turret {
-  TurretMachineGun(PVector position) {
+class TurretShotgun extends Turret {
+  TurretShotgun(PVector position) {
     pos = position;
   }
   void update() {
@@ -18,17 +18,32 @@ class TurretMachineGun extends Turret {
         }
       }
     }
-    if (best!=null && bestDistance < 200) { 
+    if (best!=null && bestDistance < 150) { 
       angle = best.pos.copy().sub(pos).heading();
-      vel = PVector.fromAngle(angle+random(-0.05, 0.05), best.pos.copy());
+      vel = PVector.fromAngle(angle, best.pos.copy());
       vel.normalize();
+
       lock = true;
     } else {
       lock = false;
     }
     if (lock == true) {
-      if (imageIndex <= 3 && frameCount % 3 == 1) imageIndex++;
-      if (imageIndex == 1 && frameCount % 3 == 1) m.projectileList.add(new Projectile(pos, vel, angle));
+      if (imageIndex <= 3 && frameCount % 15 == 1) imageIndex++;
+      if (imageIndex == 1 && frameCount % 15 == 1) {
+        m.projectileList.add(new Projectile(pos, vel, angle));
+        vel = PVector.fromAngle(angle+random(0.05, 0.1), best.pos.copy());
+        vel.normalize();
+        m.projectileList.add(new Projectile(pos, vel, angle));
+        vel = PVector.fromAngle(angle+random(0.1, 0.2), best.pos.copy());
+        vel.normalize();
+        m.projectileList.add(new Projectile(pos, vel, angle));
+        vel = PVector.fromAngle(angle+random(-0.1, -0.05), best.pos.copy());
+        vel.normalize();
+        m.projectileList.add(new Projectile(pos, vel, angle));
+        vel = PVector.fromAngle(angle+random(-0.2, -0.1), best.pos.copy());
+        vel.normalize();
+        m.projectileList.add(new Projectile(pos, vel, angle));
+      }
     } else if (lock != true && imageIndex>0) imageIndex++;
   }
   void display() {
