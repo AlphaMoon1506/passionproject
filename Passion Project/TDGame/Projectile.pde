@@ -5,16 +5,21 @@ class Projectile {
     pos = position.copy();
     vel = velocity.copy();
     a = angle;
-    vel.setMag(25);
+    vel.setMag(35);
   }
   void display() {
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(a);
-    stroke(#FFDD52);
+    strokeWeight(2);
+    stroke(#E3C00E);
     line(-20, 0, 0, 0);
+    stroke(#FFDD52);
+    strokeWeight(3);
+    line(0, 0, 15, 0);
     popMatrix();
     stroke(0);
+    strokeWeight(1);
   }
   void update() {
     pos.add(vel);

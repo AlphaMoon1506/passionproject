@@ -12,7 +12,7 @@ class Map {
   int health = 100, money = 140;
   Map() {
     turretList.add(new TurretRoaming());
-    enemyList.add(new Enemy(new PVector(-50, 500), byte(1)));
+    enemyList.add(new Enemy(new PVector(-50, 500), 0));
     rectList.add(new Rect(0, 0, 1000, 50));
     rectList.add(new Rect(0, 150, 20, 150));
     rectList.add(new Rect(100, 150, 200, 150));
@@ -94,7 +94,7 @@ class Map {
       Enemy e = m.enemyList.get(i);
       if (e.hp<1) {
         m.enemyList.remove(e);
-        money+=10;
+        money+=5;
       }
       if (e.pos.x>1000) {
         m.enemyList.remove(e);
@@ -163,7 +163,10 @@ class Map {
     if (enemyList.size() < 1) {
       enemyCount+=2;
       for (int i = 0; i<enemyCount; i++) {
-        enemyList.add(new Enemy(new PVector(-100+random(-50, 50), 500+random(-50, 50)), byte(1)));
+        byte sp = (byte)random(0,3);
+        if (sp == 0) enemyList.add(new Enemy(new PVector(-100+random(-50, 50), 500+random(-50, 50)), 0));
+        else if (sp == 1) enemyList.add(new Enemy(new PVector(-100+random(-50, 50), 100+random(-50, 50)), 2));
+        else if (sp == 2) enemyList.add(new Enemy(new PVector(-100+random(-50, 50), 350+random(-50, 50)), 1));
       }
     }
   }
